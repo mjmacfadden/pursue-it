@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hobby Predisposition Survey</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Pursue It</h1>
+            <p>Uncover your natural inclinations and explore hobbies that align with your personality. Take the survey to learn about your passions and pursuits, and find inspiration for new activities to enrich your life. Let your journey to discovering exciting hobbies begin!</p>
+            <form id="survey-form">
+                <div id="question-container" class="mb-4">
+                    <!-- Questions will be dynamically inserted here -->
+                </div>
+                <div id="navigation" class="d-flex">
+                    <button type="button" id="back-btn" class="btn btn-secondary">Back</button>
+                    <button type="button" id="next-btn" class="btn btn-primary">Next</button>
+                </div>
+            </form>
+        </div>
+    
+        <!-- Modal for Results (remains the same) -->
+        <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="resultsModalLabel">Survey Results</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="result-text"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
