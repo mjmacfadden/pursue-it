@@ -5,15 +5,30 @@ const questions = [
     { question: "I prefer hobbies that involve physical activity or being outdoors.", category: "Active" },
     { question: "I enjoy challenging myself with sports, exercise, or fitness goals.", category: "Active" },
     { question: "I feel more engaged when my hobbies involve movement and energy.", category: "Active" },
-    { question: "I enjoy creating things, whether it’s art, writing, or other forms of expression.", category: "Artistic/Creative" },
-    { question: "I often come up with unique ideas or solutions to problems.", category: "Artistic/Creative" },
-    { question: "I find joy in crafting, designing, or making something visually appealing.", category: "Artistic/Creative" },
+    { question: "I enjoy creating things, whether it’s art, writing, or other forms of expression.", category: "Creative" },
+    { question: "I often come up with unique ideas or solutions to problems.", category: "Creative" },
+    { question: "I find joy in crafting, designing, or making something visually appealing.", category: "Creative" },
     { question: "I enjoy exploring complex ideas or learning about new topics.", category: "Intellectual" },
     { question: "I like solving puzzles, riddles, or analyzing data.", category: "Intellectual" },
     { question: "I feel most fulfilled when engaging in thought-provoking discussions or research.", category: "Intellectual" }
 ];
 
-const scores = { Social: 0, Active: 0, "Artistic/Creative": 0, Intellectual: 0 };
+const typeMapping = {
+    "Social-Active": 1,
+    "Social-Creative": 2,
+    "Social-Intellectual": 3,
+    "Active-Social": 4, 
+    "Active-Creative": 5,
+    "Active-Intellectual": 6,
+    "Creative-Social": 7,
+    "Creative-Active": 8,
+    "Creative-Intellectual": 9,
+    "Intellectual-Social": 10,
+    "Intellectual-Active": 11,
+    "Intellectual-Creative": 12
+};
+
+const scores = { Social: 0, Active: 0, "Creative": 0, Intellectual: 0 };
 const questionContainer = document.getElementById('question-container');
 const navigation = document.getElementById('navigation');
 let currentQuestionIndex = 0;
@@ -77,7 +92,6 @@ navigation.addEventListener('click', (e) => {
 // Initial question display
 showQuestion(currentQuestionIndex);
 
-// Handle form submission
 document.getElementById('survey-form').addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -96,16 +110,91 @@ document.getElementById('survey-form').addEventListener('submit', (e) => {
     const primary = sortedCategories[0];
     const secondary = sortedCategories[1];
 
+    // Determine the type based on primary and secondary categories
+    const userType = typeMapping[`${primary[0]}-${secondary[0]}`] || typeMapping[`${secondary[0]}-${primary[0]}`] || "Unknown"; // If combination not found, defaults to "Unknown"
+
     // Display results in modal
-    document.getElementById('result-text').innerText = `Your primary predisposition is ${primary[0]} with a score of ${primary[1]}, followed by ${secondary[0]} with a score of ${secondary[1]}.`;
+    //document.getElementById('result-text').innerText = `Your primary predisposition is ${primary[0]} with a score of ${primary[1]}, followed by ${secondary[0]} with a score of ${secondary[1]}.`;
+    document.getElementById('result-text').innerHTML = `Your primary hobby predisposition is <span>${primary[0]}</span>, followed by <span>${secondary[0]}</span>.`;
     
     // Show the modal
     const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
     resultsModal.show();
 
     // Save to local storage
-    localStorage.setItem('hobbySurveyResults', JSON.stringify({ primary, secondary }));
+    localStorage.setItem('hobbySurveyResults', JSON.stringify({ primary, secondary, type: userType }));
 
     // Hide navigation buttons after submission
     navigation.style.display = 'none';
+});
+
+
+//EMAIL HANDLER
+
+var form = document.getElementById('sheetdb-form');
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // Retrieve the type from local storage
+    const storedResults = JSON.parse(localStorage.getItem('hobbySurveyResults'));
+    const typeValue = storedResults ? storedResults.type : 'Unknown';
+
+    // Create FormData from the form
+    let formData = new FormData(form);
+
+    // Append type with the correct field format
+    formData.append('data[type]', typeValue);
+
+    // Debugging: Log all fields in FormData
+    for (let pair of formData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+    }
+
+    // Submit the form to SheetDB
+    fetch(form.action, {
+        method: "POST",
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then((data) => {
+        console.log('Submission successful:', data);
+
+        // Map typeValue to the corresponding result page
+        const typeRedirectMap = {
+            1: "results/social-active.html",
+            2: "results/social-creative.html",
+            3: "results/social-intellectual.html",
+            4: "results/social-reflective.html",
+            5: "results/active-creative.html",
+            6: "results/active-intellectual.html",
+            7: "results/creative-social.html",
+            8: "results/active-reflective.html",
+            9: "results/creative-social.html",
+            10: "results/intellectual-social.html",
+            11: "results/intellectual-active.html",
+            12: "results/creative-intellectual.html",
+            13: "results/intellectual-creative.html",
+            14: "results/intellectual-active.html",
+            15: "results/creative-intellectual.html",
+            16: "results/intellectual-reflective.html",
+            17: "results/reflective-social.html"
+        };
+
+        // Redirect the user based on their typeValue
+        const redirectUrl = typeRedirectMap[typeValue];
+        if (redirectUrl) {
+            window.location.href = redirectUrl;
+        } else {
+            alert('No matching results found.');
+        }
+    })
+    .catch(error => {
+        console.error('Error submitting the form:', error.message);
+        alert('There was an error submitting your form. Please try again.');
+    });
 });
