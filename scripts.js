@@ -135,6 +135,17 @@ var form = document.getElementById('sheetdb-form');
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    // Validate email field
+    const emailInput = form.querySelector('input[type="email"]');
+    const emailValue = emailInput.value.trim();
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailValue || !emailRegex.test(emailValue)) {
+        alert('Please enter a valid email address with a correct domain (e.g., example@domain.com).');
+        emailInput.focus();
+        return;
+    }
+
     // Retrieve the type from local storage
     const storedResults = JSON.parse(localStorage.getItem('hobbySurveyResults'));
     const typeValue = storedResults ? storedResults.type : 'Unknown';
@@ -169,20 +180,15 @@ form.addEventListener("submit", (e) => {
             1: "results/social-active.html",
             2: "results/social-creative.html",
             3: "results/social-intellectual.html",
-            4: "results/social-reflective.html",
+            4: "results/active-social.html",
             5: "results/active-creative.html",
             6: "results/active-intellectual.html",
             7: "results/creative-social.html",
-            8: "results/active-reflective.html",
-            9: "results/creative-social.html",
+            8: "results/creative-active.html",
+            9: "results/creative-intellectual.html",
             10: "results/intellectual-social.html",
             11: "results/intellectual-active.html",
-            12: "results/creative-intellectual.html",
-            13: "results/intellectual-creative.html",
-            14: "results/intellectual-active.html",
-            15: "results/creative-intellectual.html",
-            16: "results/intellectual-reflective.html",
-            17: "results/reflective-social.html"
+            12: "results/intellectual-creative.html",
         };
 
         // Redirect the user based on their typeValue

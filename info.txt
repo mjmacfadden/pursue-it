@@ -22,3 +22,6 @@ Creative/Intellecutal
 Intellecutal/Socail
 Intellecutal/Active
 Intellecutal/Creative
+
+
+=IF(B3=1, "Social/Active", IF(B3=2, "Social/Creative", IF(B3=3, "Social/Intellectual", IF(B3=4, "Active/Social", IF(B3=5, "Active/Creative", IF(B3=6, "Active/Intellectual", IF(B3=7, "Creative/Social", IF(B3=8, "Creative/Active", IF(B3=9, "Creative/Intellectual", IF(B3=10, "Intellectual/Social", IF(B3=11, "Intellectual/Active",IF(B3=12, "Intellectual/Creative", "Unknown Type"))))))))))))
