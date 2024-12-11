@@ -131,8 +131,13 @@ document.getElementById('survey-form').addEventListener('submit', (e) => {
 
 //EMAIL HANDLER
 var form = document.getElementById('sheetdb-form');
+var spinner = document.getElementById('loadingSpinner');
+
 form.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    // Show the spinner
+    spinner.classList.remove('d-none');
 
     // Retrieve the type from local storage
     const storedResults = JSON.parse(localStorage.getItem('hobbySurveyResults'));
@@ -143,11 +148,6 @@ form.addEventListener("submit", (e) => {
 
     // Append type with the correct field format
     formData.append('data[type]', typeValue);
-
-    // Debugging: Log all fields in FormData
-    for (let pair of formData.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
-    }
 
     // Submit the form to SheetDB
     fetch(form.action, {
@@ -189,6 +189,9 @@ form.addEventListener("submit", (e) => {
     })
     .catch(error => {
         console.error('Error submitting the form:', error.message);
+
+        // Hide the spinner if an error occurs
+        spinner.classList.add('d-none');
         alert('There was an error submitting your form. Please try again.');
     });
 });
