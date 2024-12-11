@@ -1,3 +1,8 @@
+/*
+=================================================
+GLOBAL
+=================================================
+*/
 
 .select{
     margin:10px;
@@ -11,6 +16,11 @@ span{
     display:block;
     text-align: center;
 }
+/*
+=================================================
+HOME PAGE
+=================================================
+*/
 .question{
     font-weight:600;
 }
@@ -21,4 +31,24 @@ span{
 #resultsModal span{
     display:inline-block;
     font-weight:700;
+}
+/*
+=================================================
+RESULTS
+=================================================
+*/
+.results h2{
+    font-size: 2.5em;
+}
+.results h2 span{
+    display:inline-block;
+    font-weight:700;
+}
+.results{
+    text-align: center;
+}
+.results h3{
+    font-size: 1.2em;
+    color:#999;
+    font-weight:300;
 }
