@@ -130,21 +130,9 @@ document.getElementById('survey-form').addEventListener('submit', (e) => {
 
 
 //EMAIL HANDLER
-
 var form = document.getElementById('sheetdb-form');
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    // Validate email field
-    const emailInput = form.querySelector('input[type="email"]');
-    const emailValue = emailInput.value.trim();
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (!emailValue || !emailRegex.test(emailValue)) {
-        alert('Please enter a valid email address with a correct domain (e.g., example@domain.com).');
-        emailInput.focus();
-        return;
-    }
 
     // Retrieve the type from local storage
     const storedResults = JSON.parse(localStorage.getItem('hobbySurveyResults'));
