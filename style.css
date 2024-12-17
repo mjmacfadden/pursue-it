@@ -52,3 +52,10 @@ RESULTS
     color:#999;
     font-weight:300;
 }
+.iframe_wrapper{
+    overflow: hidden;
+}
+.results iframe{
+    width:100%;
+    height:500px;
+}
