@@ -21,12 +21,12 @@ const SURVEY_CONFIG = {
         "Intellectual-Social": 10, "Intellectual-Active": 11, "Intellectual-Creative": 12
     },
     redirectMap: {
-        1: "results/social-active.html", 2: "results/social-creative.html", 
-        3: "results/social-intellectual.html", 4: "results/active-social.html",
-        5: "results/active-creative.html", 6: "results/active-intellectual.html",
-        7: "results/creative-social.html", 8: "results/creative-active.html", 
-        9: "results/creative-intellectual.html", 10: "results/intellectual-social.html",
-        11: "results/intellectual-active.html", 12: "https://sites.google.com/glenbrook225.org/pursueit/intellectual-creative"
+        1: "https://sites.google.com/glenbrook225.org/pursueit/social-active", 2: "https://sites.google.com/glenbrook225.org/pursueit/social-creative", 
+        3: "https://sites.google.com/glenbrook225.org/pursueit/social-intellectual", 4: "https://sites.google.com/glenbrook225.org/pursueit/active-social",
+        5: "https://sites.google.com/glenbrook225.org/pursueit/active-creative", 6: "https://sites.google.com/glenbrook225.org/pursueit/active-intellectual",
+        7: "https://sites.google.com/glenbrook225.org/pursueit/creative-social", 8: "https://sites.google.com/glenbrook225.org/pursueit/creative-active", 
+        9: "https://sites.google.com/glenbrook225.org/pursueit/creative-intellectual", 10: "https://sites.google.com/glenbrook225.org/pursueit/intellectual-social",
+        11: "https://sites.google.com/glenbrook225.org/pursueit/intellectual-active", 12: "https://sites.google.com/glenbrook225.org/pursueit/intellectual-creative"
     }
 };
 
