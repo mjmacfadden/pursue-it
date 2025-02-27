@@ -26,7 +26,7 @@ const SURVEY_CONFIG = {
         5: "results/active-creative.html", 6: "results/active-intellectual.html",
         7: "results/creative-social.html", 8: "results/creative-active.html", 
         9: "results/creative-intellectual.html", 10: "results/intellectual-social.html",
-        11: "results/intellectual-active.html", 12: "results/intellectual-creative.html"
+        11: "results/intellectual-active.html", 12: "https://sites.google.com/glenbrook225.org/pursueit/intellectual-creative"
     }
 };
 
